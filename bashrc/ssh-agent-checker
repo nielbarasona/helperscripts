@@ -1,0 +1,8 @@
+# Start the SSH agent and add the key
+if ! p grep -u "$USER" ssh-agent > /dev/null; then
+  ssh-agent > ~/.ssh-agent-checker
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+  eval "$(cat ~/.ssh-agent-checker)"
+fi
+ssh-add ~/.ssh/id_ed25519 > /dev/null
